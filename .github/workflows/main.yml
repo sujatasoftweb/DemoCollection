@@ -3,9 +3,7 @@
       push:
        branches: 
                  [ "main" ]
-      schedule:
-      - cron: "*/6 * * * *"
-      
+   
      env:
        COLLECTION_NAME_1: NewEnvironment.postman_environment
 
@@ -36,7 +34,7 @@
         # Run the POSTMAN collection
          - name: Run POSTMAN collection
            run: |
-               newman run ./Postman_Collections -e ./$COLLECTION_NAME_1.json -r htmlextra,csv --reporter-htmlextra-export APIResults/$COLLECTION_NAME_1.html --reporter-csv-export APIResults/$COLLECTION_NAME_1.csv --insecure --delay-request 5000
+               newman run Postman_Collections/$COLLECTION_NAME_1.json -r htmlextra,csv --reporter-htmlextra-export APIResults/$COLLECTION_NAME_1.html --reporter-csv-export APIResults/$COLLECTION_NAME_1.csv --insecure --delay-request 5000
         # Upload the contents of Test Results directory to workspaces
          - name: Output the run Details
            uses: actions/upload-artifact@v2
