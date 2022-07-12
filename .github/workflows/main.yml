@@ -6,20 +6,14 @@ on:
 push:
 
 branches:
-
 - git-work
 
 schedule:
-
 - cron: "*/6 * * * *"
-
-
 
 env:
 
 COLLECTION_NAME_1: NewEnvironment.postman_environment
-
-
 
 jobs:
 
@@ -67,11 +61,11 @@ run: mkdir -p APIResults
 
 # Run the POSTMAN collection
 
-- name: Run POSTMAN collection
+- name: Run GitPostman
 
 run: |
 
-newman run Postman_Collections/$COLLECTION_NAME_1.json -r htmlextra,csv --reporter-htmlextra-export APIResults/$COLLECTION_NAME_1.html --reporter-csv-export APIResults/$COLLECTION_NAME_1.csv --insecure --delay-request 5000
+newman run newman run TestDemo.postman_collection.json -e NewEnvironment.postman_environment.json -r htmlextra --insecure --delay-request 5000
 
 # Upload the contents of Test Results directory to workspace
 
