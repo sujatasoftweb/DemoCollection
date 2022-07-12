@@ -7,7 +7,7 @@
       - cron: "*/6 * * * *"
       
      env:
-       COLLECTION_NAME_1: NewEnvironment.postman_environment
+       COLLECTION_NAME_1: TestDemo_postman_collection
 
      jobs:
       build:
