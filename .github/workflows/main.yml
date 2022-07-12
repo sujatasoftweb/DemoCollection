@@ -1,74 +1,54 @@
-name: DemoCollection
-
-on:
-
-push:
-branches: [ "main" ]
-
-schedule:
-- cron: "*/6 * * * *"
-
-env:
-
-COLLECTION_NAME_1: NewEnvironment.postman_environment
-
-jobs:
-
-build:
-
-runs-on: ubuntu-latest
-
-steps:
-
-# Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-
-- uses: actions/checkout@v2
-
-
-# INstall Node on the runner
-
-- name: Install Node
-
-uses: actions/setup-node@v1
-
-with:
-
-node-version: "16.x"
-
-
-
-# Install the newman command line utility and also install the html extra reporter
-
--name: Install newman
-
-run: |
-
- npm install -g newman
-
- npm install -g newman-reporter-csv
-
- npm install -g newman-reporter-htmlextra
- 
-    # Make directory to upload the test results
-    - name: Make Directory for results
-      run: mkdir -p testResults
+     name: DemoCollection
+     on:
+      push:
+       branches: 
+                 [ "main" ]
+      schedule:
+      - cron: "*/6 * * * *"
       
-    # Run the POSTMAN collection
-    - name: Run POSTMAN collection
-      run: |
-       newman run TestDemo.postman_collection.json -e NewEnvironment.postman_environment.json -r htmlextra --insecure --delay-request 5000
+     env:
+       COLLECTION_NAME_1: NewEnvironment.postman_environment
 
-    # Upload the contents of Test Results directory to workspace
-    - name: Output the run Details
-      uses: actions/upload-artifact@v2
-      with: 
-       name: RunReports
-       path: APIResults
+     jobs:
+      build:
+       runs-on: ubuntu-latest
+       steps:
+         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+         - uses: actions/checkout@v2
+
+         # INstall Node on the runner
+         - name: Install Node
+           uses: actions/setup-node@v1
+           with:
+            node-version: "16.x"
        
-     - uses: actions/upload-artifact@v3
-      if: failure()
-      with:
-       name: RunReports
-       path: APIResults
+         # Install the newman command line utility and also install the html extra reporter
+         - name: Install newman
+           run: |
+             npm install -g newman
+             npm install -g newman-reporter-csv
+             npm install -g newman-reporter-htmlextra
+ 
+        # Make directory to upload the test results
+         - name: Make Directory for results
+           run: mkdir -p testResults
+        
+        # Run the POSTMAN collection
+         - name: Run POSTMAN collection
+           run: |
+               newman run TestDemo.postman_collection.json -e NewEnvironment.postman_environment.json -r htmlextra --insecure --delay-request 5000
 
+        # Upload the contents of Test Results directory to workspaces
+         - name: Output the run Details
+           uses: actions/upload-artifact@v2
+           with: 
+            name: RunReports
+            path: APIResults
+       
+         - uses: actions/upload-artifact@v3
+           if: failure()
+           with:
+              name: RunReports
+              path: APIResults
+ 
 
