@@ -43,11 +43,9 @@ node-version: "16.x"
 -name: Install newman
 
 run: |
-
 npm install -g newman
 
 npm install -g newman-reporter-csv
-
 npm install -g newman-reporter-htmlextra
 
 # Make directory to upload the test results
@@ -61,8 +59,7 @@ run: mkdir -p APIResults
 - name: Run POSTMAN collection
 
 run: |
-
-newman run newman run TestDemo.postman_collection.json -e NewEnvironment.postman_environment.json -r htmlextra --insecure --delay-request 5000
+newman run TestDemo.postman_collection.json -e NewEnvironment.postman_environment.json -r htmlextra --insecure --delay-request 5000
 
 # Upload the contents of Test Results directory to workspace
 
