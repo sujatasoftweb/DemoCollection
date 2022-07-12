@@ -42,13 +42,13 @@ node-version: "16.x"
 
 -name: Install newman
 
-run:|
+run: |
 
-npm install -g newman
+ npm install -g newman
 
-npm install -g newman-reporter-csv
+ npm install -g newman-reporter-csv
 
-npm install -g newman-reporter-htmlextra
+ npm install -g newman-reporter-htmlextra
 
 # Make directory to upload the test results
 
