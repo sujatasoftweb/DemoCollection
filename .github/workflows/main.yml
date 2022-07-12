@@ -4,9 +4,7 @@ name: DemoCollection
 on:
 
 push:
-
-branches:
-- git-work
+branches: [ "main" ]
 
 schedule:
 - cron: "*/6 * * * *"
@@ -61,7 +59,7 @@ run: mkdir -p APIResults
 
 # Run the POSTMAN collection
 
-- name: Run GitPostman
+- name: Run POSTMAN collection
 
 run: |
 
