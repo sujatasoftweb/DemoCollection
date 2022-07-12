@@ -56,26 +56,19 @@ run: |
     # Run the POSTMAN collection
     - name: Run POSTMAN collection
       run: |
-newman run TestDemo.postman_collection.json -e NewEnvironment.postman_environment.json -r htmlextra --insecure --delay-request 5000
+       newman run TestDemo.postman_collection.json -e NewEnvironment.postman_environment.json -r htmlextra --insecure --delay-request 5000
 
-# Upload the contents of Test Results directory to workspace
+    # Upload the contents of Test Results directory to workspace
+    - name: Output the run Details
+      uses: actions/upload-artifact@v2
+      with: 
+       name: RunReports
+       path: APIResults
+       
+     - uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+       name: RunReports
+       path: APIResults
 
-- name: Output the run Details
 
-uses: actions/upload-artifact@v3
-
-with:
-
-name: RunReports
-
-path: APIResults
-
-- uses: actions/upload-artifact@v3
-
-if: failure()
-
-with:
-
-name: RunReports
-
-path: APIResults
