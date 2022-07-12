@@ -40,7 +40,7 @@ node-version: "16.x"
 
 # Install the newman command line utility and also install the html extra reporter
 
-- name: Install newman
+-name: Install newman
 
 run: |
 
