@@ -58,7 +58,7 @@ run: |
 
 # Run the POSTMAN collection
 
-Run POSTMAN collection
+-n name:Run POSTMAN collection
 
 run: |
 newman run TestDemo.postman_collection.json -e NewEnvironment.postman_environment.json -r htmlextra --insecure --delay-request 5000
